@@ -48,40 +48,15 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-// Contact form submission via Web3Forms
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const submitBtn = document.getElementById('submit-btn');
-    const result = document.getElementById('form-result');
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = '送信中...';
-    result.className = 'form-result';
-    result.textContent = '';
-
-    const formData = new FormData(contactForm);
-    const response = await fetch('https://formsubmit.co/ajax/n.nihei@knopp.co.jp', {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    }).catch(() => null);
-
-    const data = response ? await response.json().catch(() => null) : null;
-
-    if (data && data.success === 'true') {
-      result.className = 'form-result success';
-      result.textContent = 'お問い合わせを受け付けました。ご入力のメールアドレスに確認メールをお送りしましたのでご確認ください。';
-      contactForm.reset();
-    } else {
-      result.className = 'form-result error';
-      result.textContent = '送信に失敗しました。時間をおいて再度お試しいただくか、お電話にてご連絡ください。';
-    }
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = '送信する（無料相談を申し込む）';
-  });
+// Show success message after Formsubmit redirect
+if (new URLSearchParams(window.location.search).get('sent') === 'true') {
+  const result = document.getElementById('form-result');
+  if (result) {
+    result.className = 'form-result success';
+    result.textContent = 'お問い合わせを受け付けました。ご入力のメールアドレスに確認メールをお送りしましたのでご確認ください。';
+    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  window.history.replaceState({}, '', '/#contact');
 }
 
 // Smooth scroll offset for fixed header
