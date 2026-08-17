@@ -62,14 +62,15 @@ if (contactForm) {
     result.textContent = '';
 
     const formData = new FormData(contactForm);
-    const response = await fetch('https://api.web3forms.com/submit', {
+    const response = await fetch('https://formsubmit.co/ajax/n.nihei@knopp.co.jp', {
       method: 'POST',
-      body: formData
+      body: formData,
+      headers: { 'Accept': 'application/json' }
     }).catch(() => null);
 
     const data = response ? await response.json().catch(() => null) : null;
 
-    if (data && data.success) {
+    if (data && data.success === 'true') {
       result.className = 'form-result success';
       result.textContent = 'お問い合わせを受け付けました。ご入力のメールアドレスに確認メールをお送りしましたのでご確認ください。';
       contactForm.reset();
