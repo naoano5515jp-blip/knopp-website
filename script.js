@@ -48,6 +48,41 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
+// Contact form submission via Web3Forms
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submit-btn');
+    const result = document.getElementById('form-result');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '送信中...';
+    result.className = 'form-result';
+    result.textContent = '';
+
+    const formData = new FormData(contactForm);
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    }).catch(() => null);
+
+    const data = response ? await response.json().catch(() => null) : null;
+
+    if (data && data.success) {
+      result.className = 'form-result success';
+      result.textContent = 'お問い合わせを受け付けました。ご入力のメールアドレスに確認メールをお送りしましたのでご確認ください。';
+      contactForm.reset();
+    } else {
+      result.className = 'form-result error';
+      result.textContent = '送信に失敗しました。時間をおいて再度お試しいただくか、お電話にてご連絡ください。';
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = '送信する（無料相談を申し込む）';
+  });
+}
+
 // Smooth scroll offset for fixed header
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {

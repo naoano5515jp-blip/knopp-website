@@ -112,6 +112,32 @@ ul {
   background: var(--gold-light);
 }
 
+.botcheck {
+  display: none !important;
+}
+
+.form-result {
+  display: none;
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.form-result.success {
+  display: block;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.form-result.error {
+  display: block;
+  background: #fdecea;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
 .btn-submit {
   width: 100%;
   padding: 18px;

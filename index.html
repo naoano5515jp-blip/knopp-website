@@ -375,7 +375,12 @@
         <p class="section-sub light">「どこから手をつければいいかわからない」という段階からご相談いただけます。<br />初回ヒアリングは無料です。</p>
       </div>
       <div class="contact-inner">
-        <form class="contact-form" id="contact-form" action="mailto:n.nihei@knopp.co.jp" method="post" enctype="text/plain">
+        <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="40aa9c58-cd41-4013-ad9c-5644ac34ff00" />
+          <input type="hidden" name="subject" value="【knopp】お問い合わせがありました" />
+          <input type="hidden" name="from_name" value="株式会社knopp お問い合わせフォーム" />
+          <input type="hidden" name="redirect" value="false" />
+          <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" />
           <div class="form-row">
             <label>施設名（ホテル・旅館名） <span class="required">必須</span></label>
             <input type="text" name="facility" placeholder="例：〇〇ホテル" required />
@@ -402,7 +407,8 @@
               <span><a href="#" class="link-gold">個人情報の取り扱い</a>に同意する</span>
             </label>
           </div>
-          <button type="submit" class="btn btn-gold btn-submit">送信する（無料相談を申し込む）</button>
+          <div id="form-result" class="form-result" aria-live="polite"></div>
+          <button type="submit" class="btn btn-gold btn-submit" id="submit-btn">送信する（無料相談を申し込む）</button>
         </form>
         <div class="contact-tel">
           <p class="tel-label">またはお電話でもご相談を受け付けております</p>
